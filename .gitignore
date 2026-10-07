@@ -9,3 +9,8 @@
 .DS_Store
 coverage
 *.log
+
+# Generated CLI data (keep the committed example).
+*.tsv
+!mocks/offers.tsv
+/generated/

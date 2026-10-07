@@ -1,0 +1,118 @@
+{
+  "offers": [
+    {
+      "title": "Sunny apartment near the Louvre",
+      "description": "Bright apartment with a kitchen and a quiet bedroom in central Paris.",
+      "city": "Paris",
+      "previewImage": "https://example.com/paris-preview.jpg",
+      "images": [
+        "https://example.com/paris-1.jpg",
+        "https://example.com/paris-2.jpg",
+        "https://example.com/paris-3.jpg",
+        "https://example.com/paris-4.jpg",
+        "https://example.com/paris-5.jpg",
+        "https://example.com/paris-6.jpg"
+      ],
+      "authorEmail": "host1@example.com",
+      "coordinates": {
+        "latitude": 48.85661,
+        "longitude": 2.351499
+      }
+    },
+    {
+      "title": "Cozy studio beside the cathedral",
+      "description": "A comfortable studio with a kitchen and workspace near Cologne cathedral.",
+      "city": "Cologne",
+      "previewImage": "https://example.com/cologne-preview.jpg",
+      "images": [
+        "https://example.com/cologne-1.jpg",
+        "https://example.com/cologne-2.jpg",
+        "https://example.com/cologne-3.jpg",
+        "https://example.com/cologne-4.jpg",
+        "https://example.com/cologne-5.jpg",
+        "https://example.com/cologne-6.jpg"
+      ],
+      "authorEmail": "host2@example.com",
+      "coordinates": {
+        "latitude": 50.938361,
+        "longitude": 6.959974
+      }
+    },
+    {
+      "title": "Quiet house close to Grand Place",
+      "description": "A spacious house with bright bedrooms and easy access to central Brussels.",
+      "city": "Brussels",
+      "previewImage": "https://example.com/brussels-preview.jpg",
+      "images": [
+        "https://example.com/brussels-1.jpg",
+        "https://example.com/brussels-2.jpg",
+        "https://example.com/brussels-3.jpg",
+        "https://example.com/brussels-4.jpg",
+        "https://example.com/brussels-5.jpg",
+        "https://example.com/brussels-6.jpg"
+      ],
+      "authorEmail": "host3@example.com",
+      "coordinates": {
+        "latitude": 50.846557,
+        "longitude": 4.351697
+      }
+    },
+    {
+      "title": "Comfortable room by the canal",
+      "description": "Cozy room with breakfast and a workspace close to Amsterdam canals.",
+      "city": "Amsterdam",
+      "previewImage": "https://example.com/amsterdam-preview.jpg",
+      "images": [
+        "https://example.com/amsterdam-1.jpg",
+        "https://example.com/amsterdam-2.jpg",
+        "https://example.com/amsterdam-3.jpg",
+        "https://example.com/amsterdam-4.jpg",
+        "https://example.com/amsterdam-5.jpg",
+        "https://example.com/amsterdam-6.jpg"
+      ],
+      "authorEmail": "host4@example.com",
+      "coordinates": {
+        "latitude": 52.370216,
+        "longitude": 4.895168
+      }
+    },
+    {
+      "title": "Modern apartment near the harbour",
+      "description": "Modern apartment with a quiet bedroom and kitchen near Hamburg harbour.",
+      "city": "Hamburg",
+      "previewImage": "https://example.com/hamburg-preview.jpg",
+      "images": [
+        "https://example.com/hamburg-1.jpg",
+        "https://example.com/hamburg-2.jpg",
+        "https://example.com/hamburg-3.jpg",
+        "https://example.com/hamburg-4.jpg",
+        "https://example.com/hamburg-5.jpg",
+        "https://example.com/hamburg-6.jpg"
+      ],
+      "authorEmail": "host5@example.com",
+      "coordinates": {
+        "latitude": 53.550341,
+        "longitude": 10.000654
+      }
+    },
+    {
+      "title": "Welcoming suite near the Rhine",
+      "description": "A welcoming suite with a bright living area and views of the Rhine promenade.",
+      "city": "Dusseldorf",
+      "previewImage": "https://example.com/dusseldorf-preview.jpg",
+      "images": [
+        "https://example.com/dusseldorf-1.jpg",
+        "https://example.com/dusseldorf-2.jpg",
+        "https://example.com/dusseldorf-3.jpg",
+        "https://example.com/dusseldorf-4.jpg",
+        "https://example.com/dusseldorf-5.jpg",
+        "https://example.com/dusseldorf-6.jpg"
+      ],
+      "authorEmail": "host6@example.com",
+      "coordinates": {
+        "latitude": 51.225402,
+        "longitude": 6.776314
+      }
+    }
+  ]
+}

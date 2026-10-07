@@ -15,7 +15,9 @@
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "ts": "ts-node"
+    "ts": "ts-node",
+    "mock:server": "json-server --watch mocks/mock-server-data.json",
+    "test": "npm run build && node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@types/node": "18.16.3",
@@ -23,16 +25,18 @@
     "@typescript-eslint/parser": "5.46.0",
     "eslint": "8.39.0",
     "eslint-config-htmlacademy": "9.1.1",
+    "json-server": "^0.17.4",
     "rimraf": "3.0.2",
     "ts-node": "10.9.1",
     "typescript": "4.9.5"
   },
   "type": "module",
   "engines": {
-    "node": "^18.0.0",
+    "node": ">=18.0.0",
     "npm": ">=8"
   },
   "dependencies": {
+    "axios": "^1.20.0",
     "chalk": "^5.6.2"
   }
 }

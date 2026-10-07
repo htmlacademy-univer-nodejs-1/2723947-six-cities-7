@@ -3,7 +3,10 @@ import {readFileSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import chalk from 'chalk';
+import {Readable, Writable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
 import {readOffers} from './tsv-file-reader.js';
+import {generateOffers} from './offer-generator.js';
 
 const packagePath = resolve(dirname(fileURLToPath(import.meta.url)), '../package.json');
 
@@ -13,7 +16,22 @@ function printHelp(): void {
   console.log(`${chalk.green('--help')}                         показать справку`);
   console.log(`${chalk.green('--version')}                      показать версию из package.json`);
   console.log(`${chalk.green('--import <path>')}                прочитать TSV и вывести предложения`);
-  console.log(`${chalk.yellow('--generate <n> <path> <url>')}    генерация TSV (следующее задание)`);
+  console.log(`${chalk.green('--generate <n> <path> <url>')}     сгенерировать TSV из данных JSON-сервера`);
+}
+
+async function importOffers(path: string): Promise<void> {
+  let count = 0;
+  async function* results(): AsyncGenerator<string> {
+    for await (const offer of readOffers(path)) {
+      yield `${chalk.green(`Предложение ${++count}:`)}\n${JSON.stringify(offer)}\n`;
+    }
+    yield `${chalk.cyan(`Импортировано предложений: ${count}`)}\n`;
+  }
+  await pipeline(Readable.from(results()), new Writable({
+    write(chunk, encoding, callback) {
+      process.stdout.write(chunk, encoding, callback);
+    },
+  }));
 }
 
 async function main(): Promise<void> {
@@ -32,16 +50,18 @@ async function main(): Promise<void> {
       if (args.length !== 1) {
         throw new Error('Укажите путь к TSV-файлу: --import <path>');
       }
-      let count = 0;
-      for await (const offer of readOffers(args[0])) {
-        console.log(chalk.green(`Предложение ${++count}:`));
-        console.log(chalk.white(JSON.stringify(offer, null, 2)));
-      }
-      console.log(chalk.cyan(`Импортировано предложений: ${count}`));
+      await importOffers(args[0]);
       return;
     }
-    case '--generate':
-      throw new Error('Команда --generate будет реализована в следующем задании.');
+    case '--generate': {
+      const count = Number(args[0]);
+      if (args.length !== 3 || !/^\d+$/.test(args[0]) || !Number.isSafeInteger(count) || count < 1) {
+        throw new Error('Укажите положительное целое число, путь и URL: --generate <n> <path> <url>');
+      }
+      await generateOffers(count, args[1], args[2]);
+      console.log(chalk.cyan(`Сгенерировано предложений: ${count}. Файл: ${args[1]}`));
+      return;
+    }
     default:
       throw new Error(`Неизвестная команда: ${command}. Используйте --help.`);
   }

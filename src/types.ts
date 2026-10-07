@@ -56,3 +56,6 @@ export type Comment = {
 export type ImportedOffer = Omit<Offer, 'author' | 'commentsCount'> & {
   authorEmail: string;
 };
+
+export type OfferTemplate = Pick<ImportedOffer,
+  'title' | 'description' | 'city' | 'previewImage' | 'images' | 'authorEmail' | 'coordinates'>;
