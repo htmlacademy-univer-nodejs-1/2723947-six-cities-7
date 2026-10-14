@@ -14,3 +14,8 @@ coverage
 *.tsv
 !mocks/offers.tsv
 /generated/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
