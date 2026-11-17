@@ -1,11 +1,7 @@
 import {Connection, HydratedDocument, Model, Schema} from 'mongoose';
-import {User} from '../../types.js';
+import {UserEntity} from './user.entity.js';
 
-export type UserRecord = Omit<User, 'password'> & {
-  passwordHash: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+export type UserRecord = UserEntity;
 
 export type UserDocument = HydratedDocument<UserRecord>;
 export type UserModel = Model<UserRecord>;

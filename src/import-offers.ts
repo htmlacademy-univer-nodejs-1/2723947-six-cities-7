@@ -30,7 +30,7 @@ export class ImportOffers {
             type: 'regular',
           });
         }
-        await this.offers.create({...offer, author: author._id});
+        await this.offers.create({...offer, authorId: author.id});
         count++;
       }
       this.logger.info(`Импортировано предложений: ${count}`);

@@ -37,7 +37,6 @@ async function loadTemplates(url: string): Promise<OfferTemplate[]> {
   }
   for (const template of data) {
     try {
-      // Validate remote data before opening the output file.
       const offer = generateOffer(template);
       if ([offer.title, offer.description, offer.previewImage, offer.authorEmail,
         ...offer.images].some((value) => typeof value !== 'string' || /[\t\r\n;]/.test(value))) {

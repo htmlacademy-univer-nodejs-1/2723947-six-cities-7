@@ -8,6 +8,15 @@ import {UserService} from '../../modules/user/user-service.interface.js';
 import {createOfferModel, OfferModel} from '../../modules/offer/offer.model.js';
 import {DefaultOfferService} from '../../modules/offer/default-offer-service.js';
 import {OfferService} from '../../modules/offer/offer-service.interface.js';
+import {createCommentModel, CommentModel} from '../../modules/comment/comment.model.js';
+import {CommentService} from '../../modules/comment/comment-service.interface.js';
+import {DefaultCommentService} from '../../modules/comment/default-comment-service.js';
+import {createFavoriteModel, FavoriteModel} from '../../modules/favorite/favorite.model.js';
+import {FavoriteService} from '../../modules/favorite/favorite-service.interface.js';
+import {DefaultFavoriteService} from '../../modules/favorite/default-favorite-service.js';
+import {createSessionModel, SessionModel} from '../../modules/session/session.model.js';
+import {AuthService} from '../../modules/session/auth-service.interface.js';
+import {DefaultAuthService} from '../../modules/session/default-auth-service.js';
 import {Database} from '../database/database.interface.js';
 import {MongoDatabase} from '../database/mongo-database.js';
 import {Application} from '../../app/application.js';
@@ -29,4 +38,13 @@ container.bind<OfferModel>(Component.OfferModel).toDynamicValue(() =>
   createOfferModel(container.get<Connection>(Component.MongoConnection))).inSingletonScope();
 container.bind<UserService>(Component.UserService).to(DefaultUserService).inSingletonScope();
 container.bind<OfferService>(Component.OfferService).to(DefaultOfferService).inSingletonScope();
+container.bind<CommentModel>(Component.CommentModel).toDynamicValue(() =>
+  createCommentModel(container.get<Connection>(Component.MongoConnection))).inSingletonScope();
+container.bind<FavoriteModel>(Component.FavoriteModel).toDynamicValue(() =>
+  createFavoriteModel(container.get<Connection>(Component.MongoConnection))).inSingletonScope();
+container.bind<SessionModel>(Component.SessionModel).toDynamicValue(() =>
+  createSessionModel(container.get<Connection>(Component.MongoConnection))).inSingletonScope();
+container.bind<CommentService>(Component.CommentService).to(DefaultCommentService).inSingletonScope();
+container.bind<FavoriteService>(Component.FavoriteService).to(DefaultFavoriteService).inSingletonScope();
+container.bind<AuthService>(Component.AuthService).to(DefaultAuthService).inSingletonScope();
 container.bind<ImportOffers>(Component.ImportOffers).to(ImportOffers).inSingletonScope();

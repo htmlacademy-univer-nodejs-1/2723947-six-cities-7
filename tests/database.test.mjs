@@ -36,7 +36,6 @@ test('MongoDB services and CLI persist users, references and timestamps and clos
   skip: !process.env.MONGODB_TEST_URI,
   timeout: 60000,
 }, async () => {
-  // Always replace the database name: cleanup cannot drop the caller's database.
   const url = new URL(process.env.MONGODB_TEST_URI);
   url.pathname = `/six_cities_test_${randomUUID().replaceAll('-', '')}`;
   const uri = url.toString();
@@ -62,13 +61,12 @@ test('MongoDB services and CLI persist users, references and timestamps and clos
     const iterator = readOffers('mocks/offers.tsv');
     const {value: {authorEmail: _email, ...data}} = await iterator.next();
     await iterator.return();
-    const offer = await offers.create({...data, author: user._id});
-    assert.equal((await offers.findById(offer.id)).title, data.title);
+    const offer = await offers.create({...data, authorId: user.id});
+    assert.equal((await offers.findById(offer._id.toString())).title, data.title);
     assert.equal(await offers.findById('000000000000000000000000'), null);
     assert.equal(offer.commentsCount, 0);
     assert.ok(offer.createdAt instanceof Date && offer.updatedAt instanceof Date);
-    assert.deepEqual(offer.coordinates.toObject(), data.coordinates);
-    await offer.populate('author');
+    assert.deepEqual(offer.coordinates, data.coordinates);
     assert.equal(offer.author.email, user.email);
 
     const source = await readFile('mocks/offers.tsv', 'utf8');

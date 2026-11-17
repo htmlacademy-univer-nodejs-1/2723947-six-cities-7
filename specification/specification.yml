@@ -178,8 +178,9 @@ paths:
       operationId: createOffer
       summary: Создать предложение
       description: >-
-        Требуется действующий Bearer-токен сеанса. Автор определяется по токену. isFavorite и commentsCount
-        формируются сервером. Все входные данные валидируются; при ошибке предложение не создаётся.
+        Требуется действующий Bearer-токен сеанса. Автор определяется по токену. Рейтинг, isFavorite и
+        commentsCount формируются сервером и не принимаются в запросе. Все входные данные валидируются; при
+        ошибке предложение не создаётся.
       security:
         - BearerAuth: []
       requestBody:
@@ -388,8 +389,9 @@ paths:
       summary: Добавить комментарий
       description: >-
         Требуется действующий Bearer-токен сеанса. Автор и дата публикации определяются сервером. При ошибке
-        валидации комментарий не сохраняется. При успехе обновляется commentsCount предложения. Редактирование
-        и удаление комментариев не предусмотрены.
+        валидации комментарий не сохраняется. При успехе автоматически обновляются commentsCount и средний
+        рейтинг по оценкам всех комментариев, включая не вошедшие в последние 50. Редактирование и удаление
+        комментариев не предусмотрены.
       security:
         - BearerAuth: []
       requestBody:
@@ -635,7 +637,6 @@ components:
         - previewImage
         - images
         - isPremium
-        - rating
         - housingType
         - bedrooms
         - maxAdults
@@ -681,13 +682,6 @@ components:
         isPremium:
           type: boolean
           example: true
-        rating:
-          type: number
-          minimum: 1
-          maximum: 5
-          multipleOf: 0.1
-          description: Рейтинг с точностью до одного знака после запятой.
-          example: 4.8
         housingType:
           type: string
           enum:
@@ -731,8 +725,8 @@ components:
         coordinates:
           $ref: '#/components/schemas/Coordinates'
       description: >-
-        Все поля обязательны. Автор берётся из сеанса, commentsCount вычисляется сервером, isFavorite зависит
-        от текущего пользователя.
+        Все поля обязательны. Автор берётся из сеанса. Рейтинг и количество комментариев рассчитываются
+        сервером, isFavorite зависит от текущего пользователя.
     UpdateOffer:
       type: object
       additionalProperties: false
@@ -776,13 +770,6 @@ components:
         isPremium:
           type: boolean
           example: true
-        rating:
-          type: number
-          minimum: 1
-          maximum: 5
-          multipleOf: 0.1
-          description: Рейтинг с точностью до одного знака после запятой.
-          example: 4.8
         housingType:
           type: string
           enum:
@@ -885,8 +872,11 @@ components:
           minimum: 1
           maximum: 5
           multipleOf: 0.1
-          description: Рейтинг с точностью до одного знака после запятой.
+          description: >-
+            Среднее оценок всех комментариев, округлённое до одного знака после запятой. До первого
+            комментария — 1 (минимальное значение по ТЗ). При первой оценке заменяется её значением.
           example: 4.8
+          readOnly: true
         commentsCount:
           type: integer
           minimum: 0
@@ -962,8 +952,11 @@ components:
           minimum: 1
           maximum: 5
           multipleOf: 0.1
-          description: Рейтинг с точностью до одного знака после запятой.
+          description: >-
+            Среднее оценок всех комментариев, округлённое до одного знака после запятой. До первого
+            комментария — 1 (минимальное значение по ТЗ). При первой оценке заменяется её значением.
           example: 4.8
+          readOnly: true
         housingType:
           type: string
           enum:

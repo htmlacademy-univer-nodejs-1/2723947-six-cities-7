@@ -18,7 +18,6 @@ export class MongoDatabase implements Database {
       this.logger.info('Соединение с MongoDB установлено');
     } catch {
       this.logger.error('Не удалось подключиться к MongoDB');
-      // Driver errors may include the URI and credentials.
       throw new Error('Не удалось подключиться к MongoDB. Проверьте URI, учётные данные и доступность сервера.');
     }
   }

@@ -52,7 +52,6 @@ export type Comment = {
   author: User;
 };
 
-// The file identifies an existing author by email; the database will resolve that reference.
 export type ImportedOffer = Omit<Offer, 'author' | 'commentsCount'> & {
   authorEmail: string;
 };
