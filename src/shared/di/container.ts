@@ -25,6 +25,11 @@ import {ConfigService} from '../config/config-service.js';
 import {Logger} from '../logger/logger.interface.js';
 import {PinoLogger} from '../logger/pino-logger.js';
 import {Component} from './component.js';
+import {UserController} from '../../modules/user/user.controller.js';
+import {OfferController} from '../../modules/offer/offer.controller.js';
+import {FavoriteController} from '../../modules/favorite/favorite.controller.js';
+import {ExceptionFilter} from '../http/exception-filter.js';
+import {RequestAuth} from '../http/request-auth.js';
 
 export const container = new Container();
 container.bind<Logger>(Component.Logger).to(PinoLogger).inSingletonScope();
@@ -48,3 +53,8 @@ container.bind<CommentService>(Component.CommentService).to(DefaultCommentServic
 container.bind<FavoriteService>(Component.FavoriteService).to(DefaultFavoriteService).inSingletonScope();
 container.bind<AuthService>(Component.AuthService).to(DefaultAuthService).inSingletonScope();
 container.bind<ImportOffers>(Component.ImportOffers).to(ImportOffers).inSingletonScope();
+container.bind<UserController>(Component.UserController).to(UserController).inSingletonScope();
+container.bind<OfferController>(Component.OfferController).to(OfferController).inSingletonScope();
+container.bind<FavoriteController>(Component.FavoriteController).to(FavoriteController).inSingletonScope();
+container.bind<RequestAuth>(Component.RequestAuth).to(RequestAuth).inSingletonScope();
+container.bind<ExceptionFilter>(Component.ExceptionFilter).to(ExceptionFilter).inSingletonScope();

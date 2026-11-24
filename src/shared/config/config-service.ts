@@ -14,7 +14,7 @@ export class ConfigService implements Config {
     try {
       this.configuration.validate({allowed: 'strict'});
     } catch {
-      throw new Error('Проверьте обязательные переменные PORT (порт), DB_HOST (IP-адрес), SALT (непустая строка).');
+      throw new Error('Проверьте обязательные переменные PORT (порт), MONGODB_URI (строка подключения), SALT (непустая строка).');
     }
   }
 

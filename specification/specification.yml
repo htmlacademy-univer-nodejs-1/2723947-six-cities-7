@@ -551,7 +551,7 @@ components:
           type: string
           format: uri
           description: URL аватара JPG/PNG. Если аватар не загружен, возвращается URL изображения по умолчанию.
-          example: http://localhost:3000/static/default-avatar.png
+          example: http://localhost:3000/static/avatars/default-avatar.jpg
         type:
           type: string
           enum:

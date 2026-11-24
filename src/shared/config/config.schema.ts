@@ -1,8 +1,5 @@
 import convict from 'convict';
-import validatorFormats from 'convict-format-with-validator';
 import {AppConfig} from './config.interface.js';
-
-convict.addFormats(validatorFormats);
 
 export const configSchema: convict.Schema<AppConfig> = {
   PORT: {
@@ -11,11 +8,16 @@ export const configSchema: convict.Schema<AppConfig> = {
     default: null,
     env: 'PORT',
   },
-  DB_HOST: {
-    doc: 'IP-адрес сервера базы данных',
-    format: 'ipaddress',
+  MONGODB_URI: {
+    doc: 'Строка подключения к MongoDB',
+    format: (value: unknown): void => {
+      if (typeof value !== 'string' || !/^mongodb(?:\+srv)?:\/\/\S+$/.test(value)) {
+        throw new Error('Ожидается URI MongoDB');
+      }
+    },
     default: null,
-    env: 'DB_HOST',
+    env: 'MONGODB_URI',
+    sensitive: true,
   },
   SALT: {
     doc: 'Соль для хеширования паролей',

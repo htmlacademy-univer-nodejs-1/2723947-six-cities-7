@@ -1,6 +1,6 @@
 export type AppConfig = {
   PORT: number;
-  DB_HOST: string;
+  MONGODB_URI: string;
   SALT: string;
 };
 

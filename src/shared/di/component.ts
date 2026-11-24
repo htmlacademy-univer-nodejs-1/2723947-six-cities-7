@@ -15,4 +15,9 @@ export const Component = {
   SessionModel: Symbol.for('SessionModel'),
   AuthService: Symbol.for('AuthService'),
   ImportOffers: Symbol.for('ImportOffers'),
+  UserController: Symbol.for('UserController'),
+  OfferController: Symbol.for('OfferController'),
+  FavoriteController: Symbol.for('FavoriteController'),
+  RequestAuth: Symbol.for('RequestAuth'),
+  ExceptionFilter: Symbol.for('ExceptionFilter'),
 } as const;
